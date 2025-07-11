@@ -7,10 +7,7 @@
   <!-- Google Fonts: Limelight + Open Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -31,41 +28,50 @@
       Your browser does not support HTML5 video.
     </video>
     <div class="overlay" id="hero-overlay">
-      <h2 class="headline">Welcome to the Show</h2>
-      <p class="tagline">A web design experience by Justin Monserrat</p>
-      <button id="play-button">Play the Movie</button>
+      <!-- Initial Intro Content -->
+      <div id="hero-intro">
+        <h2 class="headline">Welcome to the Show</h2>
+        <p class="tagline">A web design experience by Justin Monserrat</p>
+        <button id="play-button">Play the Movie</button>
+      </div>
+
+      <!-- Reuse same classes for style -->
+      <div id="post-video-message" style="display: none;">
+        <h2 class="headline">Enjoy the show!</h2>
+        <button id="restart-button">Restart the Movie</button>
+      </div>
     </div>
   </section>
 
   <!-- Opening About Scene -->
   <section id="credits" class="scene credits">
-    <div class="credits-roll">
+    <div class="credits-roll final">
       <p>Directed by Justin Monserrat</p>
       <p>From Long Island, NY — Currently in Maryland</p>
       <p>Associates in Web & App Development</p>
       <p>Passionate about storytelling through code</p>
     </div>
+    <button id="mute-button" class="mute-button">🔊</button>
     <div class="scroll-cue" data-target="scenes">↓</div>
   </section>
 
-  <!-- Scene Selection -->
-  <section id="scenes" class="scene scenes">
+<!-- Scene Selection -->
+<section id="scenes" class="scene scenes">
+  <div class="scene-inner">
     <h2 class="section-title">Scene Selection</h2>
     <div class="scenes-grid">
-      <div class="scene-card" onclick="window.open('https://monserratjp.stu.charleston.edu/732/artists/index.html', '_blank')">
-        <img src="assets/radiohead_logo.jpg" alt="Radiohead Fan Site">
-        <div class="card-title">Scene 1: Radiohead Fan Site</div>
+      <div class="scene-card" data-title="Scene 1: Radiohead Fan Site" onclick="window.open('https://monserratjp.stu.charleston.edu/732/artists/index.html', '_blank')">
+        <img src="assets/radiohead_poster.webp" alt="Radiohead Fan Site">
       </div>
-      <div class="scene-card" onclick="window.open('https://justinmonserrat.github.io/memory-game/', '_blank')">
-        <img src="assets/six_of_crows_logo.jpeg" alt="Six of Crows Memory Card Game">
-        <div class="card-title">Scene 2: Six of Crows Memory Game</div>
+      <div class="scene-card" data-title="Scene 2: Six of Crows Memory Game" onclick="window.open('https://justinmonserrat.github.io/memory-game/', '_blank')">
+        <img src="assets/six_of_crows_poster.jpeg" alt="Six of Crows Memory Card Game">
       </div>
-      <div class="scene-card" onclick="window.open('https://justinmonserrat.github.io/justins-wordle/', '_blank')">
-        <img src="assets/wordle_logo.jpeg" alt="Wordle Duplication">
-        <div class="card-title">Scene 3: Wordle Duplication</div>
+      <div class="scene-card" data-title="Scene 3: Wordle Duplication" onclick="window.open('https://justinmonserrat.github.io/justins-wordle/', '_blank')">
+        <img src="assets/wordle_poster.jpg" alt="Wordle Duplication">
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Placeholder for project detail sections -->
   <section id="project1" class="scene project-detail"></section>
@@ -73,11 +79,22 @@
   <section id="project3" class="scene project-detail"></section>
 
   <!-- Contact Section -->
-  <section id="contact" class="scene contact">
-    <h2>Contact</h2>
-    <p>Test Change</p>
-    <!-- contact form… -->
-  </section>
+<section id="contact" class="scene contact">
+  <h2 class="headline">The End</h2>
+  <p class="tagline">Let’s stay in touch after the show</p>
+
+  <div class="contact-info">
+    <p><span class="label">Email:</span> <a href="mailto:justin.monserrat@example.com">justinmonserrat3@icloud.com</a></p>
+    <p><span class="label">Located:</span> Maryland | New York</p>
+  </div>
+
+  <div class="social-links">
+    <a href="https://github.com/justinmonserrat" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/justinmonserrat" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+
 
   <script src="script.js"></script>
 </body>

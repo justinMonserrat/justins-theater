@@ -1,122 +1,173 @@
-// Track whether the About sequence has run and store timeouts
 let aboutStarted = false;
 let aboutTimeouts = [];
+let aboutTriggeredByClick = false;
+let bgAudio = null;
 
-// Smooth scroll helper
+// Scroll helper
 function scrollToSection(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 
-// Intercept nav & scroll-cue clicks for smooth scrolling and content triggers
+// Nav + Scroll Cue Events
 document.querySelectorAll('nav a, .scroll-cue').forEach(el => {
   el.addEventListener('click', e => {
     e.preventDefault();
     const target = el.dataset.target;
+
+    if (target === 'credits') {
+      aboutTriggeredByClick = true;
+    }
+
     if (target === 'home') {
       resetHero();
-    } else if (target === 'credits') {
+    } else {
+      scrollToSection(target);
+    }
+
+    if (target === 'credits') {
       resetCredits();
-      scrollToSection('credits');
       startAboutSequence();
     } else {
       resetCredits();
-      scrollToSection(target);
     }
   });
 });
 
-// Wire up the “Play the Movie” button
-document.getElementById('play-button').addEventListener('click', playMovie);
-
-// Play intro video → then show About sequence
-function playMovie() {
-  const video   = document.getElementById('intro-video');
+// Play Button Behavior
+document.getElementById('play-button').addEventListener('click', () => {
+  const video = document.getElementById('intro-video');
   const overlay = document.getElementById('hero-overlay');
-  const button  = document.getElementById('play-button');
+  const intro = document.getElementById('hero-intro');
+  const postMessage = document.getElementById('post-video-message');
 
-  button.disabled       = true;
+  aboutTriggeredByClick = true;
+
+  // Hide intro content and post-video message
+  intro.style.display = 'none';
+  postMessage.style.display = 'none';
   overlay.style.display = 'none';
 
-  video.style.display   = 'block';
+  // Show and play the video
+  video.style.display = 'block';
   video.play();
 
+  // When video ends
   video.onended = () => {
     video.style.display = 'none';
     scrollToSection('credits');
+    resetCredits();
     startAboutSequence();
-  };
-}
 
-// Reset the hero so Home works and button re-enables
+    // Show "Enjoy the show!" message
+    overlay.style.display = 'flex';
+    postMessage.style.display = 'block';
+  };
+});
+
+// Restart Button Behavior
+document.getElementById('restart-button').addEventListener('click', () => {
+  resetHero();
+  document.getElementById('post-video-message').style.display = 'none';
+  document.getElementById('hero-intro').style.display = 'flex';
+});
+
+// Reset Hero
 function resetHero() {
-  const video   = document.getElementById('intro-video');
+  const video = document.getElementById('intro-video');
   const overlay = document.getElementById('hero-overlay');
-  const button  = document.getElementById('play-button');
+  const button = document.getElementById('play-button');
 
   video.pause();
-  video.currentTime      = 0;
-  video.style.display    = 'none';
-  overlay.style.display  = 'flex';
-  button.disabled        = false;
+  video.currentTime = 0;
+  video.style.display = 'none';
+  overlay.style.display = 'flex';
+  button.disabled = false;
 
   scrollToSection('home');
 }
 
-// Reset About credits for replay, clearing all pending timeouts
+// Reset About Section
 function resetCredits() {
   aboutStarted = false;
-  // Clear scheduled timeouts
-  aboutTimeouts.forEach(id => clearTimeout(id));
+  aboutTimeouts.forEach(clearTimeout);
   aboutTimeouts = [];
 
-  // Remove final layout and hide all paragraphs
   const roll = document.querySelector('.credits-roll');
   roll.classList.remove('final');
+
   document.querySelectorAll('.credits-roll p').forEach(p => {
-    p.style.display    = 'none';
-    p.style.opacity    = 0;
-    p.style.transition = '';
+    p.style.display = 'none';
+    p.style.opacity = 0;
+    p.style.transition = 'none';
   });
+
+  if (bgAudio) {
+    bgAudio.pause();
+    bgAudio.currentTime = 0;
+    document.getElementById('mute-button').style.display = 'none';
+  }
 }
 
-// Sequentially fade in/out each line, then show all in final layout
+// Start About Section
 function startAboutSequence() {
   if (aboutStarted) return;
   aboutStarted = true;
 
-  const paragraphs = Array.from(document.querySelectorAll('.credits-roll p'));
-  const fadeInDur  = 1000;
-  const displayDur = 2000;
-  const fadeOutDur = 1000;
-  let delay        = 500;
+  const roll = document.querySelector('.credits-roll');
+  const paragraphs = [...document.querySelectorAll('.credits-roll p')];
+
+  if (!aboutTriggeredByClick) {
+    roll.classList.add('final');
+    paragraphs.forEach(p => {
+      p.style.display = 'block';
+      p.style.opacity = 0.85;
+    });
+    return;
+  }
+
+  // Start background music
+  bgAudio = new Audio('assets/hans_zimmer_time.mp3');
+  bgAudio.loop = true;
+  bgAudio.volume = 0.5;
+  bgAudio.play();
+  document.getElementById('mute-button').style.display = 'block';
+
+  // Rolling credits
+  let delay = 500;
+  const fadeIn = 1000, hold = 2000, fadeOut = 1000;
 
   paragraphs.forEach(p => {
-    // Fade in each line
     aboutTimeouts.push(setTimeout(() => {
-      p.style.display    = 'block';
-      p.style.transition = `opacity ${fadeInDur}ms ease-in-out`;
-      p.style.opacity    = 1;
+      p.style.display = 'block';
+      p.style.transition = `opacity ${fadeIn}ms ease-in-out`;
+      p.style.opacity = 1;
     }, delay));
 
-    delay += fadeInDur + displayDur;
+    delay += fadeIn + hold;
 
-    // Fade out each line (including last)
     aboutTimeouts.push(setTimeout(() => {
-      p.style.transition = `opacity ${fadeOutDur}ms ease-in-out`;
-      p.style.opacity    = 0;
+      p.style.transition = `opacity ${fadeOut}ms ease-in-out`;
+      p.style.opacity = 0;
     }, delay));
 
-    delay += fadeOutDur;
+    delay += fadeOut;
   });
 
-  // After all fade-outs, show all lines simultaneously in final layout
   aboutTimeouts.push(setTimeout(() => {
-    const roll = document.querySelector('.credits-roll');
     roll.classList.add('final');
-    document.querySelectorAll('.credits-roll p').forEach(p => {
-      p.style.display    = 'block';
-      p.style.opacity    = '';
+    paragraphs.forEach(p => {
+      p.style.display = 'block';
+      p.style.opacity = 0.85;
       p.style.transition = '';
     });
+    aboutTriggeredByClick = false;
   }, delay));
 }
+
+// Mute Button Handler
+const muteButton = document.getElementById('mute-button');
+muteButton.addEventListener('click', () => {
+  if (!bgAudio) return;
+  bgAudio.muted = !bgAudio.muted;
+  muteButton.textContent = bgAudio.muted ? '🔇' : '🔊';
+});
