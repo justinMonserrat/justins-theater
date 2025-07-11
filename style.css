@@ -291,6 +291,7 @@ button:disabled {
   transition: transform 0.3s ease, box-shadow 0.5s ease;
   background-color: #000;
 }
+
 .scene-card img {
   width: 100%;
   height: 100%;
@@ -415,4 +416,132 @@ button:disabled {
 @keyframes bounce {
   0%, 100% { transform: translate(-50%, 0); }
   50%      { transform: translate(-50%, 10px); }
+}
+
+
+/* ---------------------------
+   Breakpoints
+---------------------------- */
+@media (max-width: 768px) {
+  /* Header layout */
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1rem 2rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 15;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu a {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .headline {
+    font-size: 2.2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .overlay {
+    padding: 1rem;
+  }
+
+  .scene.scenes {
+    padding: 3rem 1rem;
+  }
+
+  .scene.scenes .section-title {
+    font-size: 2rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .scenes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .scene-card {
+  aspect-ratio: 16 / 9;
+}
+
+.scene-card::after {
+  font-size: 1rem;
+  padding: 0.75rem;
+}
+
+  .credits-roll.final p {
+    font-size: 1.6rem;
+  }
+
+  .scene.contact .headline {
+    font-size: 2.2rem;
+  }
+
+  .scene.contact .tagline {
+    font-size: 1rem;
+  }
+
+  .contact-info p,
+  .social-links a {
+    font-size: 1rem;
+  }
+}
+
+
+/* ---------------------------
+   Hamburger Icon Styles
+---------------------------- */
+.hamburger {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  z-index: 20;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Transform hamburger into "X" when open */
+.hamburger.open .top-bar {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.open .middle-bar {
+  opacity: 0;
+}
+.hamburger.open .bottom-bar {
+  transform: translateY(-9px) rotate(-45deg);
 }

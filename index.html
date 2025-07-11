@@ -13,7 +13,12 @@
 <body>
   <header>
     <h1 class="logo">Justin’s Theater</h1>
-    <nav>
+    <button class="hamburger" id="hamburger">
+      <span class="bar top-bar"></span>
+      <span class="bar middle-bar"></span>
+      <span class="bar bottom-bar"></span>
+    </button>
+    <nav id="nav-menu" class="nav-menu">
       <a href="#" data-target="home">Home</a>
       <a href="#" data-target="credits">About</a>
       <a href="#" data-target="scenes">Projects</a>
@@ -23,7 +28,7 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero">
-    <video id="intro-video" class="intro-video" muted poster="assets/red_seats_landing.jpg">
+    <video id="intro-video" class="intro-video" muted playsinline poster="assets/red_seats_landing.jpg">
       <source src="assets/intro.mp4" type="video/mp4" />
       Your browser does not support HTML5 video.
     </video>
