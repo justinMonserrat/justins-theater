@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Justin’s Theater</title>
+  <!-- Google Fonts: Limelight + Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1 class="logo">Justin’s Theater</h1>
+    <nav>
+      <a href="#" data-target="home">Home</a>
+      <a href="#" data-target="credits">About</a>
+      <a href="#" data-target="scenes">Projects</a>
+      <a href="#" data-target="contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <video id="intro-video" class="intro-video" muted poster="assets/red_seats_landing.jpg">
+      <source src="assets/intro.mp4" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="overlay" id="hero-overlay">
+      <h2 class="headline">Welcome to the Show</h2>
+      <p class="tagline">A web design experience by Justin Monserrat</p>
+      <button id="play-button">Play the Movie</button>
+    </div>
+  </section>
+
+  <!-- Opening About Scene -->
+  <section id="credits" class="scene credits">
+    <div class="credits-roll">
+      <p>Directed by Justin Monserrat</p>
+      <p>From Long Island, NY — Currently in Maryland</p>
+      <p>Associates in Web & App Development</p>
+      <p>Passionate about storytelling through code</p>
+    </div>
+    <div class="scroll-cue" data-target="scenes">↓</div>
+  </section>
+
+  <!-- Scene Selection -->
+  <section id="scenes" class="scene scenes">
+    <h2 class="section-title">Scene Selection</h2>
+    <div class="scenes-grid">
+      <div class="scene-card" onclick="window.open('https://monserratjp.stu.charleston.edu/732/artists/index.html', '_blank')">
+        <img src="assets/radiohead_logo.jpg" alt="Radiohead Fan Site">
+        <div class="card-title">Scene 1: Radiohead Fan Site</div>
+      </div>
+      <div class="scene-card" onclick="window.open('https://justinmonserrat.github.io/memory-game/', '_blank')">
+        <img src="assets/six_of_crows_logo.jpeg" alt="Six of Crows Memory Card Game">
+        <div class="card-title">Scene 2: Six of Crows Memory Game</div>
+      </div>
+      <div class="scene-card" onclick="window.open('https://justinmonserrat.github.io/justins-wordle/', '_blank')">
+        <img src="assets/wordle_logo.jpeg" alt="Wordle Duplication">
+        <div class="card-title">Scene 3: Wordle Duplication</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Placeholder for project detail sections -->
+  <section id="project1" class="scene project-detail"></section>
+  <section id="project2" class="scene project-detail"></section>
+  <section id="project3" class="scene project-detail"></section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="scene contact">
+    <h2>Contact</h2>
+    <p>Test Change</p>
+    <!-- contact form… -->
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+/* Import Limelight + Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:wght@400;600&display=swap');
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles */
+body, html {
+  height: 100%;
+  scroll-behavior: smooth;
+  background: #121212;
+  color: #f0f0f0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 10;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: 'Limelight', serif;
+}
+
+nav a {
+  color: #f0f0f0;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-family: 'Limelight', serif;
+}
+nav a:hover {
+  color: #cc3d3d;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  background: url('assets/red_seats_landing.jpg') no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.intro-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: none; z-index: 1;
+}
+.overlay {
+  position: absolute; inset: 0;
+  z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 1.5s ease forwards;
+}
+.headline {
+  font-size: 3rem; margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: 'Limelight', serif;
+}
+.tagline {
+  font-size: 1.2rem; margin-bottom: 2rem;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Limelight', serif;
+}
+button {
+  background: #cc3d3d; border: none; color: #fff;
+  padding: 0.75rem 1.5rem; font-size: 1rem;
+  cursor: pointer; transition: background 0.3s;
+  font-family: 'Limelight', serif;
+}
+button:hover:enabled { background: #aa2f2f; }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Opening Info Scene */
+.scene.credits {
+  background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+  position: relative; height: 100vh; overflow: hidden;
+  padding: 3rem 1rem;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.scene.credits::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 20vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+}
+.credits-roll {
+  position: relative; width: 100%; max-width: 600px; text-align: center;
+}
+.credits-roll p {
+  position: absolute; top: 50%; left: 50%;
+  width: 100%; transform: translate(-50%, -50%);
+  font-size: 2.2rem; letter-spacing: 0.2em;
+  color: #fff; opacity: 0; white-space: normal;
+  text-align: center; transition: opacity 1s ease-in-out;
+}
+.credits-roll.final p {
+  position: static; transform: none;
+  display: block; opacity: 0.85; margin: 2.5rem 0;
+}
+
+/* Scene Selection: Horizontal Panels */
+.scene.scenes {
+  background: url('assets/scene-bg.jpg') center center/cover no-repeat; /* placeholder */
+  padding: 4rem 2rem; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+}
+.scene.scenes .section-title {
+  font-family: 'Limelight', serif;
+  font-size: 2.5rem; margin-bottom: 1.5rem;
+  color: #fff; text-align: center;
+}
+.scenes-grid {
+  display: flex; flex-direction: column; align-items: center;
+  width: 100%; gap: 1.5rem;
+}
+.scenes-grid .scene-card {
+  width: 80%;            /* desired width */
+  height: 25vh;          /* desired height */
+  background: rgba(0,0,0,0.6);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex; flex-direction: column;
+}
+.scenes-grid .scene-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+.scene-card .card-title {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Limelight', serif;
+  font-size: 1.4rem;
+  color: #fff;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  border-radius: 8px 8px 0 0; /* round top corners */
+  z-index: 1;
+}
+.scene-card img {
+  flex: 1;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 0 8px 8px; /* round bottom corners */
+}
+
+/* Contact Section */
+.scene.contact {
+  padding: 4rem 2rem; background: #000; color: #f0f0f0;
+}
+.scene.contact h2 {
+  font-family: 'Limelight', serif;
+  font-size: 2.5rem; text-align: center; margin-bottom: 2rem;
+}
+
+/* Scroll cue arrow */
+.scroll-cue {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  font-size: 3rem; color: #fff;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translate(-50%, 0); }
+  50%     { transform: translate(-50%, 10px); }
+}
