@@ -57,7 +57,21 @@
       <p>Passionate about storytelling through code</p>
     </div>
     <button id="mute-button" class="mute-button">🔊</button>
-    <div class="scroll-cue" data-target="scenes">↓</div>
+    <div class="recently-watched">
+      <button class="toggle-watchlist" onclick="toggleWatchlist()">Recently Watched</button>
+      <div id="watchlist-dropdown" class="watchlist-dropdown hidden">
+        <ul id="watchlist-grid" class="watchlist-grid">
+          <!-- JS will dynamically insert:
+              <li>
+                <img src="..." alt="Movie Poster">
+                <div class="rating">★ 8/10</div>
+                <div class="title">Movie Title (2024)</div>
+              </li>
+          -->
+        </ul>
+        <p class="powered-by">Powered by <a href="https://trakt.tv" target="_blank">Trakt API synced with Letterboxd activity.</a></p>
+      </div>
+    </div>
   </section>
 
 <!-- Scene Selection -->

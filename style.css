@@ -391,20 +391,108 @@ button:disabled {
   color: #f0f0f0;
 }
 
-
-
 /* ---------------------------
-   Scroll Cue Arrow
+   Recently Watched Dropdown
 ---------------------------- */
-.scroll-cue {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
-  color: #fff;
-  animation: bounce 2s infinite;
+.recently-watched {
+  margin-top: 3rem;
+  text-align: center;
 }
+
+.toggle-watchlist {
+  background: #cc3d3d;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.2rem;
+  font-family: 'Limelight', serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-watchlist:hover {
+  background: #aa2f2f;
+}
+
+.watchlist-dropdown {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.watchlist-dropdown.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.watchlist-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.watchlist-grid li {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 0.5rem;
+  max-width: 150px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.watchlist-grid li:hover {
+  transform: translateY(-5px);
+}
+
+.watchlist-grid .rating {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  font-family: 'Limelight', serif;
+  color: #ffcc00;
+}
+
+.watchlist-grid .title {
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+  color: #f0f0f0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.watchlist-grid img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.watchlist-grid li:hover img {
+  transform: scale(1.05);
+}
+
+/* Hover Title Overlay */
+
+
+.watchlist-grid .rating {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  font-family: 'Limelight', serif;
+  color: #ffcc00;
+}
+
+.powered-by {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #999;
+}
+
 
 /* ---------------------------
    Animations

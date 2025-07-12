@@ -180,3 +180,42 @@ hamburger.addEventListener('click', () => {
   navMenu.classList.toggle('active');
   hamburger.classList.toggle('open');
 });
+
+// -----------------------------
+// Trakt API – Recently Watched
+// -----------------------------
+function toggleWatchlist() {
+  const dropdown = document.getElementById('watchlist-dropdown');
+  dropdown.classList.toggle('hidden');
+}
+
+fetch('https://trakt-proxy.onrender.com/api/recent')
+  .then(res => res.json())
+  .then(movies => {
+    if (!Array.isArray(movies)) {
+      console.error('❌ Invalid data from server:', movies);
+      return;
+    }
+
+    const list = document.getElementById('watchlist-grid');
+    list.innerHTML = '';
+
+    movies.forEach(({ title, year, poster, rating }) => {
+      const li = document.createElement('li');
+      li.setAttribute('data-title', `${title} (${year})`);
+
+      const posterImg = poster || 'https://via.placeholder.com/150x225?text=No+Image';
+      const ratingDisplay = rating ? `★ ${rating}/10` : 'Not Rated';
+
+      li.innerHTML = `
+        <img src="${posterImg}" alt="${title} poster">
+        <div class="rating">${ratingDisplay}</div>
+        <div class="title">${title} (${year})</div>
+      `;
+
+      list.appendChild(li);
+    });
+  })
+  .catch(err => {
+    console.error('❌ Failed to fetch recent movies:', err);
+  });
